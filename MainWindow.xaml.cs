@@ -61,7 +61,7 @@ namespace Afkgame
 
         private void BuyJuniorDev(object sender, RoutedEventArgs e)
         {
-            Worker newJuniorDev = new Worker("Junior Dev", 5, 3, 2); 
+            Worker newJuniorDev = new Worker("Junior Dev", 5, 3, 18);
             if (gameManager.BuyWorker(newJuniorDev))
             {
                 MessageBox.Show("Junior bought!");
@@ -75,7 +75,7 @@ namespace Afkgame
 
         private void BuySeniorDev(object sender, RoutedEventArgs e)
         {
-            Worker newSeniorDev = new Worker("Senior Dev", 25, 9, 7);
+            Worker newSeniorDev = new Worker("Senior Dev", 25, 9, 60);
             if (gameManager.BuyWorker(newSeniorDev))
             {
                 MessageBox.Show("Senior bought!");
@@ -89,7 +89,7 @@ namespace Afkgame
 
         private void BuyDesigner(object sender, RoutedEventArgs e)
         {
-            Worker newDesigner = new Worker("Designer", 32, 13, 10);
+            Worker newDesigner = new Worker("Designer", 32, 13, 700);
             if (gameManager.BuyWorker(newDesigner))
             {
                 MessageBox.Show("Senior bought!");
@@ -143,6 +143,11 @@ namespace Afkgame
             };
 
             moneyProgressBar.BeginAnimation(ProgressBar.ValueProperty, doubleAnimation);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

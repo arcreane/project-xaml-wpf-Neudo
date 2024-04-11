@@ -16,14 +16,14 @@
     Dev agency
         </TextBlock>
 
-        <Label x:Name="moneyLabel" Content="Money: 10$" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,340,53,0"/>
+        <Label x:Name="moneyLabel" Content="Money: 25$" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,398,53,0"/>
         <Label x:Name="workerLimitLabel" Content="0 / 10 Workers" HorizontalAlignment="Left" Margin="339,24,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Button x:Name="increasWorkersLimitBtn" Content="Add 10 slots (300$)" Click="IncreaseWorkersLimit" Margin="267,55,21,337" Grid.Column="1" />
         <Label x:Name="rentLabel" Content="Rent : 45$" HorizontalAlignment="Left" Margin="363,102,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
 
 
-        <ProgressBar x:Name="moneyProgressBar"  Value="0"  Background="Green" HorizontalAlignment="Left" Height="14" Margin="228,321,0,0" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="moneyProgressBar"  Value="0"  Background="Green" HorizontalAlignment="Left" Height="14" Margin="228,379,0,0" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
 
 
 
@@ -38,6 +38,9 @@
 
 
 
-        <Label x:Name="cycleLabel" Content="Cycle : 0" HorizontalAlignment="Left" Margin="228,295,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.18,7.205"/>
+        <Label x:Name="cycleLabel" Content="Cycle : 0" HorizontalAlignment="Left" Margin="228,348,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.18,7.205"/>
+        <Button Grid.Column="1" Content="Special TASK !" HorizontalAlignment="Left" Margin="363,401,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label Grid.Column="1" Content="Task" HorizontalAlignment="Left" Height="30" Margin="387,217,0,0" VerticalAlignment="Top" Width="39"/>
+        <ListBox Grid.Column="1" HorizontalAlignment="Left" Height="114" Margin="279,260,0,0" VerticalAlignment="Top" Width="147" d:ItemsSource="{d:SampleData ItemCount=5}"/>
     </Grid>
 </Window>

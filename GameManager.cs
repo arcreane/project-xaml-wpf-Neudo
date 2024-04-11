@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,9 @@ namespace Afkgame
         public int Cycles { get; private set; }
         public double Rent { get; set; }
 
+        private bool isGameActive = true;
+
+
 
         private Timer moneyGenerationTimer;
         public event EventHandler MoneyGenerated;
@@ -41,10 +45,14 @@ namespace Afkgame
             Rent = 45;
 
             // Timer
-            moneyGenerationTimer = new Timer(1000); // 10 secondes
-            moneyGenerationTimer.Elapsed += OnMoneyGenerated;
-            moneyGenerationTimer.AutoReset = true;
-            moneyGenerationTimer.Enabled = true;
+            if (isGameActive)
+            {
+                moneyGenerationTimer = new Timer(1000); // 10 secondes
+                moneyGenerationTimer.Elapsed += OnMoneyGenerated;
+                moneyGenerationTimer.AutoReset = true;
+                moneyGenerationTimer.Enabled = true;
+            }
+         
         }
 
         // Méthode pour acheter un worker
@@ -75,6 +83,12 @@ namespace Afkgame
 
         private void OnMoneyGenerated(object sender, ElapsedEventArgs e)
         {
+            if (!isGameActive)
+            {
+                return;
+            }
+
+
             GenerateMoney();
             Application.Current?.Dispatcher.Invoke(() =>
             {
@@ -100,18 +114,59 @@ namespace Afkgame
 
         private void PayWorkers()
         {
+
             double totalSalary = Workers.Sum(worker => worker.Salary);
             Money -= totalSalary;
-            MessageBox.Show($"You just paid yours workers {totalSalary}");
-            SalaryPaid?.Invoke(this, EventArgs.Empty);
+            if (Money <= -1)
+            {
+                GameOver();
+            } else
+            {
+                MessageBox.Show($"You just paid yours workers {totalSalary}");
+                SalaryPaid?.Invoke(this, EventArgs.Empty);
+            }
         }
 
 
         private void PayRent()
         {
             Money -= Rent;
-            MessageBox.Show($"You just paid your rent {Rent}");
-            RentPaid?.Invoke(this, EventArgs.Empty);
+            if (Money <= -1)
+            {
+                GameOver();
+            }
+            else
+            {
+               
+                MessageBox.Show($"You just paid your rent {Rent}");
+                RentPaid?.Invoke(this, EventArgs.Empty);
+            }
         }
+
+        private void GameOver()
+        {
+            isGameActive = false;
+            moneyGenerationTimer.Stop();
+            MessageBox.Show("Game over .....");
+            Money = 25;
+            Workers.Clear();
+            TotalDevJuniors = 0;
+            TotalDevSeniors = 0;
+            TotalDesigners = 0;
+            MaxWorkers = 10;
+            Cycles = 0;
+            Rent = 45;
+            RestartGame();
+        }
+
+        private void RestartGame()
+        {
+            isGameActive = true;
+        }
+
+        // Creation des tâches
+
+
+
     }
 }
